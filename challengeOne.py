@@ -1,32 +1,35 @@
 import random
 
 # Función de Counting Sort
-def counting_sort(arr):
+def counting_sort(lista):
 
-    if not arr:
-        return  # Do nothing if the list is empty
+    if not lista:
+        return
 
-    valorMax = max(arr)
-    valorMin = min(arr)
+    valorMax = max(lista)
+    valorMin = min(lista)
     rango = valorMax - valorMin + 1
 
     count = [0] * rango
-    output = [0] * len(arr)
+    output = [0] * len(lista)
 
-    for i in range(len(arr)):
-        count[arr[i] - valorMin] += 1
+    for i in range(len(lista)):
+        count[lista[i] - valorMin] += 1
 
     for i in range(1, len(count)):
         count[i] += count[i - 1]
 
-    i = len(arr) - 1
+    i = len(lista) - 1
     while i >= 0:
-        output[count[arr[i] - valorMin] - 1] = arr[i]
-        count[arr[i] - valorMin] -= 1
+        output[count[lista[i] - valorMin] - 1] = lista[i]
+        count[lista[i] - valorMin] -= 1
         i -= 1
 
-    for i in range(len(arr)):
-        arr[i] = output[i]
+    for i in range(len(lista)):
+        lista[i] = output[i]
+
+    print("Lista ordenada:", lista)
+
 
 # Generación y procesamiento de la lista
 S = 8
@@ -42,4 +45,3 @@ listInt = [int(num) for num in listStr if (num and int(num) < S)]
 
 # Algoritmo de ordenamiento O(n) - Counting Sort
 counting_sort(listInt)
-print("Lista ordenada:", listInt)
